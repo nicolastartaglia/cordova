@@ -2,7 +2,6 @@ var express = require('express');
 var favicon = require('serve-favicon');
 var path = require('path');
 var app = express();
-var port = 80;
 
 app.use(favicon(path.join(__dirname, 'platforms/browser/www/img', 'favicon.ico')));
 app.use('/css', express.static('platforms/browser/www/css'));
