@@ -50,22 +50,62 @@
                 <a href="#!" class="brand-logo"><img id="logo" src="img/logo.png" alt="cordova"></a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="sass.html">Sass</a></li>
-                    <li><a href="badges.html">Components</a></li>
-                    <li><a href="collapsible.html">Javascript</a></li>
-                    <li><a href="mobile.html">Mobile</a></li>
+                    <li><a href="index.html">home</a></li>
+                    <li><a href="crud.html">Fake crud js</a></li>
+                    <!-- <li><a href="collapsible.html">Javascript</a></li>
+                    <li><a href="mobile.html">Mobile</a></li> -->
                 </ul>
             </div>
         </nav>
 
         <ul class="sidenav blue darken-2" id="mobile-demo">
-            <li><a href="sass.html" style="color: white;">Sass</a></li>
-            <li><a href="badges.html" style="color: white;">Components</a></li>
-            <li><a href="collapsible.html" style="color: white;">Javascript</a></li>
-            <li><a href="mobile.html" style="color: white;">Mobile</a></li>
+            <li><a href="index.html" style="color: white;">HOME</a></li>
+            <li><a href="crud.html" style="color: white;">Fake crud js</a></li>
+            <!-- <li><a href="collapsible.html" style="color: white;">Javascript</a></li>
+            <li><a href="mobile.html" style="color: white;">Mobile</a></li> -->
         </ul>
     </header>
+    
+    <section>
+        <article>
+            <div style="width: 80%;margin-left: auto; margin-right: auto;">
+                <h4>Fake crud js</h4>
+                <form action="JavaScript:void(0)" method="post" onsubmit="app.add()">
+                    <label for="add-name" style="color: black;font-weight: bolder;">Ajoutez un pays: </label>
+                    <input class="validate" type="text" name="add-name" id="add-name">
+                    <button class="btn waves-effect waves-light indigo darken-4" type="submit">Ajouter</button>
+                </form>
+                <div id="spoiler" role="aria-hidden" hidden>
+                    <form action="JavaScript:void(0)" method="post" id="saveEdit">
+                        <input class="validate" type="text" name="edit-name" id="edit-name">
+                        <button class="btn waves-effect waves-light indigo darken-4" type="submit" >Modifier</button>
+                        <a class="waves-effect waves-light btn indigo darken-4" onclick="closeInput()" aria-label="Close">&#10006</a>
+                    </form>
 
+                </div>
+                <br>
+                <p id="counter"></p>
+                <table>
+                    <tr>
+                        <th class="titres" colspan="1">
+                            <div class="contenu">
+                                Nom
+                            </div>
+                            
+                        </th>
+                        <th class="titres" colspan="2">
+                            <div class="contenu">
+                                Actions
+                            </div>
+                        </th>
+                    </tr>
+                    <tbody id="countries">
+
+                    </tbody>
+                </table>
+            </div>
+        </article>
+    </section>
 
     <section>
         <article>
@@ -78,7 +118,7 @@
             </div>
         </article>
     </section>
-    <section>
+    <!-- <section>
         <article>
             <div class="row">
                 <div class="col s12 m6">
@@ -115,7 +155,7 @@
         </article>
 
        
-    </section>
+    </section> -->
 
 
 

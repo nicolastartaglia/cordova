@@ -51,6 +51,16 @@ body {
                                    /* offset horizontal: half of text area width */
 }
 
+
+.contenu {
+    text-align: center;
+}
+
+.titres {
+    border-bottom: solid 1px blue; 
+}
+
+
 #logo {
     height: 50px;
     margin-top: 10px;

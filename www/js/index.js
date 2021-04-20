@@ -33,3 +33,80 @@ function onDeviceReady() {
 $(document).ready(function(){
     $('.sidenav').sidenav();
 });
+
+var app = new function() {
+    
+    this.el = document.getElementById('countries');
+    this.countries = [];
+
+    // compte le nombre d'éléments d'un tableau
+    this.count = function(data)  {
+        var el = document.getElementById('counter');
+        if (data > 1) {
+            el.innerHTML = data + " countries";
+        } else if (data == 0) {
+            el.innerHTML = "No country";
+        } else {
+            el.innerHTML = data + " country";
+        }
+    }
+
+    // afficher tous les pays
+    this.fetchAll = function() {
+        var data = '';
+        for (var i=0 ; i < this.countries.length ; i++){
+            data += '<tr>';
+            data += '<td><div class="contenu">' + this.countries[i] + '</div></td>';
+            data += '<td><div class="contenu"><button class="btn waves-effect waves-light indigo darken-4" onclick="app.edit('+i+')">Edit</button></div></td>';
+            data += '<td><div class="contenu"><button class="btn waves-effect waves-light indigo darken-4" onclick="app.delete('+i+')">Delete</button></div></td>';
+            data += '</tr>';
+        }
+        this.count(this.countries.length);
+        if (this.countries.length == 0){
+            return this.el.innerHTML = "Insérez un pays";
+        } else {
+            return this.el.innerHTML = data;
+        }
+    }
+
+    // ajouter un élément au tableau
+    this.add = function() {
+        var el = document.getElementById('add-name');
+        var country = el.value;
+        if (country) {
+            this.countries.push(country.trim());
+            el.value = '';
+            this.fetchAll();
+        }
+
+    }
+
+    // mise à jour d'un élément
+    this.edit = function(item) {
+        var el = document.getElementById('edit-name');
+        el.value = this.countries[item];
+        document.getElementById("spoiler").style.display = "block";
+
+        var self = this;
+        document.getElementById("saveEdit").onsubmit = function() {
+            var country = el.value;
+            if (country) {
+                self.countries.splice(item, 1, country.trim());
+                self.fetchAll();
+                closeInput();
+            }
+        }
+    }
+
+    // supprimer un élément du tableau
+    this.delete = function(item) {
+        this.countries.splice(item, 1);
+        this.fetchAll();
+    }
+}
+
+app.fetchAll();
+
+function closeInput() {
+    document.getElementById("spoiler").style.display = "none";
+}
