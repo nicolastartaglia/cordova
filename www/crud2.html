@@ -226,7 +226,6 @@
                         $('#id').attr('value', person.id);
                         $('#nom').attr('value', person.nom).focus();
                         $('#prenom').attr('value', person.prenom);
-                        
                     }
                 });
 
@@ -244,18 +243,19 @@
                 };
             },
             deletePerson: function() {
-                if (!confirm('Delete ?')) return false;
-
-                var self = this;
-                $.ajax({
-                    url: "https://server-rest-api.herokuapp.com/personnes/"+$('#id').val(), // La ressource ciblée, pour Android utiliser http://10.0.2.2:5556/personnes/
-                    type: "DELETE", // Le type de la requête HTTP,
-                    cache: false, // n'enregistre pas temporairement des copies de données
-                    success: function (person) {
-                        console.log(person);
-                        self.refreshSearch();
-                    }
-                });
+                console.log($("#id").val());
+                if ($('#id').val() != ''){
+                    if (!confirm('Delete ?')) return false;
+                    var self = this;
+                    $.ajax({
+                        url: "https://server-rest-api.herokuapp.com/personnes/"+$('#id').val(), // La ressource ciblée, pour Android utiliser http://10.0.2.2:5556/personnes/
+                        type: "DELETE", // Le type de la requête HTTP,
+                        cache: false, // n'enregistre pas temporairement des copies de données
+                        success: function (person) {
+                            self.refreshSearch();
+                        }
+                    });
+                }
             },
             refreshSearch: function() {
                 this.backToSearch();
@@ -266,31 +266,33 @@
                 $('#personDetailsPanel').show();
                 $("#nom").val("Nom");
                 $("#prenom").val("Prénom");
+                $('#id').val('');
                 $('#id').attr('value', null);
                 $('#nom').attr('value', 'Nom').focus().select();
                 $('#prenom').attr('value', 'Prénom');
                 
             },
             savePerson: function() {
-                if (!confirm('Save ?')) return false;
+                if ($('#nom').val() != 'Nom' && $('#prenom').val() != 'Prénom'){
+                    if (!confirm('Save ?')) return false;
 
-                var requestType = $('#id').val() != '' ? 'PUT' : 'POST';
-                console.log(requestType);
-                $.ajax({
-                    url: "https://server-rest-api.herokuapp.com/personnes/"+$('#id').val(), // La ressource ciblée, pour Android utiliser http://10.0.2.2:5556/personnes/
-                    type: requestType, 
-                    data: personManager.collectFieldsValues(), // on transmet les données pour le put ou post
-                    cache: false, 
-                    dataType : 'json', //  Le type de données à recevoir, ici, du json
-                    success: function (result) {
-                       if (result.error) {
-                            alert(result.error[0].message);
-                       } else {
-                           if (requestType == 'POST') alert('ID de la nouvelle entree: ' + result.id);
-                           personManager.refreshSearch();
-                       }
-                    }
-                });
+                    var requestType = $('#id').val() != '' ? 'PUT' : 'POST';
+                    $.ajax({
+                        url: "https://server-rest-api.herokuapp.com/personnes/"+$('#id').val(), // La ressource ciblée, pour Android utiliser http://10.0.2.2:5556/personnes/
+                        type: requestType, 
+                        data: personManager.collectFieldsValues(), // on transmet les données pour le put ou post
+                        cache: false, 
+                        dataType : 'json', //  Le type de données à recevoir, ici, du json
+                        success: function (result) {
+                        if (result.error) {
+                                alert(result.error[0].message);
+                        } else {
+                            if (requestType == 'POST') alert('ID de la nouvelle entree: ' + result.id);
+                            personManager.refreshSearch();
+                        }
+                        }
+                    });
+                }
             }
         }
 
@@ -306,11 +308,6 @@
                 personManager.showPersonList();
             });
 
-            
-            // $('#showDetailsButton').click(function(e) {
-            //     e.preventDefault();
-            //     personManager.showPersonDetails($('#personList').val());
-            // });
             $('#backToSearchButton').click(function(e) {
                 e.preventDefault();
                 personManager.backToSearch();
