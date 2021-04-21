@@ -18,6 +18,9 @@
                 <ul class="right hide-on-med-and-down">
                     <li><a href="index.html">home</a></li>
                     <li><a href="crud.html">Fake crud js</a></li>
+                    <li><a href="crud2.html">crud jquery</a></li>
+                    <!-- <li><a href="collapsible.html">Javascript</a></li>
+                    <li><a href="mobile.html">Mobile</a></li> -->
                 </ul>
             </div>
         </nav>
@@ -25,9 +28,12 @@
         <ul class="sidenav blue darken-2" id="mobile-demo">
             <li><a href="index.html" style="color: white;">HOME</a></li>
             <li><a href="crud.html" style="color: white;">Fake crud js</a></li>
+            <li><a href="crud2.html" style="color: white;">crud jquery</a></li>
+            <!-- <li><a href="collapsible.html" style="color: white;">Javascript</a></li>
+            <li><a href="mobile.html" style="color: white;">Mobile</a></li> -->
         </ul>
     </header>
-   
+    
     <section>
         <article>
             <div style="width: 80%;margin-left: auto; margin-right: auto;">
@@ -46,10 +52,19 @@
 
                 </div>
                 <br>
+                <p id="counter"></p>
                 <table>
                     <tr>
-                        <th>
-                            Nom
+                        <th class="titres" colspan="1">
+                            <div class="contenu">
+                                Nom
+                            </div>
+                            
+                        </th>
+                        <th class="titres" colspan="2">
+                            <div class="contenu">
+                                Actions
+                            </div>
                         </th>
                     </tr>
                     <tbody id="countries">
@@ -59,6 +74,7 @@
             </div>
         </article>
     </section>
+
     <section>
         <article>
             <div>
@@ -70,6 +86,48 @@
             </div>
         </article>
     </section>
+    <!-- <section>
+        <article>
+            <div class="row">
+                <div class="col s12 m6">
+                  <div class="card blue darken-4">
+                    <div class="card-content white-text">
+                      <span class="card-title">Article</span>
+                      <p>I am a very simple card. I am good at containing small bits of information.
+                      I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                      <a href="#">This is a link</a>
+                      <a href="#">This is a link</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </article>
+        <article>
+            <div class="row">
+                <div class="col s12 m6">
+                  <div class="card blue darken-4">
+                    <div class="card-content white-text">
+                      <span class="card-title">Article</span>
+                      <p>I am a very simple card. I am good at containing small bits of information.
+                      I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                      <a href="#">This is a link</a>
+                      <a href="#">This is a link</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </article>
+
+       
+    </section> -->
+
+
+
+
     <footer class="page-footer blue darken-2">
         <div class="container">
             <div class="row">
@@ -90,11 +148,12 @@
         </div>
         <div class="footer-copyright">
             <div class="container">
-                © 2021 Copyright Text
+                © 2021 Copyright 
                 <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
             </div>
         </div>
     </footer>
+
 
     <script src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>

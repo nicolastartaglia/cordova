@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <!-- <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="css/index.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection" />
+
+    <title>MyFirstApp Cordova</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="nav-wrapper blue darken-2">
+                <a href="#!" class="brand-logo"><img id="logo" src="img/logo.png" alt="cordova"></a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="index.html">home</a></li>
+                    <li><a href="crud.html">Fake crud js</a></li>
+                    <li><a href="crud2.html">crud jquery</a></li>
+                    <!-- <li><a href="collapsible.html">Javascript</a></li>
+                    <li><a href="mobile.html">Mobile</a></li> -->
+                </ul>
+            </div>
+        </nav>
+
+        <ul class="sidenav blue darken-2" id="mobile-demo">
+            <li><a href="index.html" style="color: white;">HOME</a></li>
+            <li><a href="crud.html" style="color: white;">Fake crud js</a></li>
+            <li><a href="crud2.html" style="color: white;">crud jquery</a></li>
+            <!-- <li><a href="collapsible.html" style="color: white;">Javascript</a></li>
+            <li><a href="mobile.html" style="color: white;">Mobile</a></li> -->
+        </ul>
+    </header>
+    
+    <div class="container">
+        <div id="personSearchPanel">
+            <h4>CRUD</h4>
+            <button class="btn waves-effect waves-light indigo darken-4" id="findButton">Afficher</button>
+            <button class="btn waves-effect waves-light indigo darken-4" id="newButton">Ajouter</button>
+            <br><br>
+            <div id="personListPanel">
+                <!-- <ul id="personList">
+
+                </ul> -->
+                <table id="personList">
+
+                </table>
+            </div>
+        </div>
+        <div id="personDetailsPanel">
+            <h5>Edit</h5>
+            <input type="hidden" id="id"><br>
+            <input type="text" id="nom"><br>
+            <input type="text" id="prenom"><br>
+            <div>
+                <button class="btn waves-effect waves-light indigo darken-4" id="backToSearchButton">Retour</button>
+                <button class="btn waves-effect waves-light indigo darken-4" id="saveButton">Enregistrer</button>
+                <button class="btn waves-effect waves-light indigo darken-4" id="deleteButton">Supprimer</button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+
+
+    <section>
+        <article>
+            <div>
+                <!-- <h1>Apache Cordova</h1> -->
+                <div id="deviceready" class="blink">
+                    <!-- <p class="event listening">Connecting to Device</p>
+                    <p class="event received">Device is Ready</p> -->
+                </div>
+            </div>
+        </article>
+    </section>
+    <!-- <section>
+        <article>
+            <div class="row">
+                <div class="col s12 m6">
+                  <div class="card blue darken-4">
+                    <div class="card-content white-text">
+                      <span class="card-title">Article</span>
+                      <p>I am a very simple card. I am good at containing small bits of information.
+                      I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                      <a href="#">This is a link</a>
+                      <a href="#">This is a link</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </article>
+        <article>
+            <div class="row">
+                <div class="col s12 m6">
+                  <div class="card blue darken-4">
+                    <div class="card-content white-text">
+                      <span class="card-title">Article</span>
+                      <p>I am a very simple card. I am good at containing small bits of information.
+                      I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                      <a href="#">This is a link</a>
+                      <a href="#">This is a link</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </article>
+
+       
+    </section> -->
+
+
+
+
+    <footer class="page-footer blue darken-2">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Appli CORDOVA</h5>
+                    <p class="grey-text text-lighten-4">Example with menu</p>
+                </div>
+                <!-- <div class="col l4 offset-l2 s12">
+              <h5 class="white-text">Links</h5>
+              <ul>
+                <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+              </ul>
+            </div> -->
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2021 Copyright 
+                <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+            </div>
+        </div>
+    </footer>
+
+    <script src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="js/materialize.js"></script>
+    <!-- <script src="js/index.js"></script> -->
+    <script>
+        var personManager = {
+            showPersonList: function() {
+                $.ajax({
+                    url: "https://server-rest-api.herokuapp.com/personnes/", // La ressource ciblée, pour Android utiliser http://10.0.2.2:5556/personnes/
+                    type: "GET", // Le type de la requête HTTP,
+                    cache: false, // n'enregistre pas temporairement des copies de données
+                    dataType : 'json', //  Le type de données à recevoir, ici, du json
+                    success: function (data) {
+                        console.log(data);
+                        // $('#personList li').remove();
+                        $('#personList tr').remove();
+                        $.each(data, function (index, personne) {
+                            // $('<li class=\"listNom\">')
+                            //     .text(personne.nom + ' / ' + personne.prenom)
+                            //     .attr('value', personne.id).appendTo($('#personList'))
+                            //     .append("<button class=\"btn waves-effect waves-light indigo darken-4\" onclick=\"personManager.showPersonDetails(\'" + personne.id + "\');\" >Edit</button>")
+                            // ;
+                            $('<tr><td>')
+                                .text(personne.nom + ' / ' + personne.prenom)
+                                .attr('value', personne.id).appendTo($('#personList'))
+                                .append("</td><td><button class=\"btn waves-effect waves-light indigo darken-4\" onclick=\"personManager.showPersonDetails(\'" + personne.id + "\');\" >Edit</button></td>")
+                        });
+                        $('#personListPanel').show();
+
+                    }
+                });
+            },
+            showPersonDetails: function(id) {
+                if (id == null) return;
+                $('#personSearchPanel').hide();
+                $.ajax({
+                    url: "https://server-rest-api.herokuapp.com/personnes/"+id, // La ressource ciblée, pour Android utiliser http://10.0.2.2:5556/personnes/
+                    type: "GET", // Le type de la requête HTTP,
+                    cache: false, // n'enregistre pas temporairement des copies de données
+                    dataType : 'json', //  Le type de données à recevoir, ici, du json
+                    success: function (person) {
+                        console.log(person);
+                        $('#personDetailsPanel').show();
+                        $("#nom").val(person.nom);
+                        $("#prenom").val(person.prenom);
+                        $('#id').attr('value', person.id);
+                        $('#nom').attr('value', person.nom).focus();
+                        $('#prenom').attr('value', person.prenom);
+                        
+                    }
+                });
+
+            },
+            backToSearch: function() {
+                $('#personDetailsPanel').hide();
+                $('#personSearchPanel').show();
+                $('#personList').focus();
+            },
+            collectFieldsValues: function() {
+                return {
+                    id: $('#id').val(),
+                    nom: $('#nom').val(),
+                    prenom: $('#prenom').val()
+                };
+            },
+            deletePerson: function() {
+                if (!confirm('Delete ?')) return false;
+
+                var self = this;
+                $.ajax({
+                    url: "https://server-rest-api.herokuapp.com/personnes/"+$('#id').val(), // La ressource ciblée, pour Android utiliser http://10.0.2.2:5556/personnes/
+                    type: "DELETE", // Le type de la requête HTTP,
+                    cache: false, // n'enregistre pas temporairement des copies de données
+                    success: function (person) {
+                        console.log(person);
+                        self.refreshSearch();
+                    }
+                });
+            },
+            refreshSearch: function() {
+                this.backToSearch();
+                this.showPersonList();
+            },
+            newPerson: function() {
+                $('#personSearchPanel').hide();
+                $('#personDetailsPanel').show();
+                $("#nom").val("Nom");
+                $("#prenom").val("Prénom");
+                $('#id').attr('value', null);
+                $('#nom').attr('value', 'Nom').focus().select();
+                $('#prenom').attr('value', 'Prénom');
+                
+            },
+            savePerson: function() {
+                if (!confirm('Save ?')) return false;
+
+                var requestType = $('#id').val() != '' ? 'PUT' : 'POST';
+                console.log(requestType);
+                $.ajax({
+                    url: "https://server-rest-api.herokuapp.com/personnes/"+$('#id').val(), // La ressource ciblée, pour Android utiliser http://10.0.2.2:5556/personnes/
+                    type: requestType, 
+                    data: personManager.collectFieldsValues(), // on transmet les données pour le put ou post
+                    cache: false, 
+                    dataType : 'json', //  Le type de données à recevoir, ici, du json
+                    success: function (result) {
+                       if (result.error) {
+                            alert(result.error[0].message);
+                       } else {
+                           if (requestType == 'POST') alert('ID de la nouvelle entree: ' + result.id);
+                           personManager.refreshSearch();
+                       }
+                    }
+                });
+            }
+        }
+
+        $(document).ready(function() {
+            
+            $('.sidenav').sidenav();
+
+
+            $('#personListPanel, #personDetailsPanel').hide();
+
+            $('#findButton').click(function(e) {
+                e.preventDefault();
+                personManager.showPersonList();
+            });
+
+            
+            // $('#showDetailsButton').click(function(e) {
+            //     e.preventDefault();
+            //     personManager.showPersonDetails($('#personList').val());
+            // });
+            $('#backToSearchButton').click(function(e) {
+                e.preventDefault();
+                personManager.backToSearch();
+            });
+
+            $('#newButton').click(function(e) {
+                e.preventDefault();
+                personManager.newPerson();
+            });
+
+            $('#saveButton').click(function(e) {
+                e.preventDefault();
+                personManager.savePerson();
+            });
+
+            $('#deleteButton').click(function(e) {
+                e.preventDefault();
+                personManager.deletePerson();
+            });
+
+        });
+    </script>
+</body>
+
+</html>
