@@ -68,6 +68,11 @@ body {
 }
 
 
+#myImage {
+    width: 200px;
+}
+
+
 
 
 /* Landscape layout (with min-width) */

@@ -67,7 +67,7 @@
             <li><a href="mobile.html" style="color: white;">Mobile</a></li> -->
         </ul>
     </header>
-    
+
     <div class="container">
         <div id="personSearchPanel">
             <h4>CRUD</h4>
@@ -88,6 +88,8 @@
             <input type="hidden" id="id"><br>
             <input type="text" id="nom"><br>
             <input type="text" id="prenom"><br>
+            <button id="cameraTakePicture">TAKE PICTURE</button>
+            <img id="myImage"></img>
             <div>
                 <button class="btn waves-effect waves-light indigo darken-4" id="backToSearchButton">Retour</button>
                 <button class="btn waves-effect waves-light indigo darken-4" id="saveButton">Enregistrer</button>
@@ -172,7 +174,7 @@
         </div>
         <div class="footer-copyright">
             <div class="container">
-                © 2021 Copyright 
+                © 2021 Copyright
                 <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
             </div>
         </div>
@@ -184,12 +186,12 @@
     <!-- <script src="js/index.js"></script> -->
     <script>
         var personManager = {
-            showPersonList: function() {
+            showPersonList: function () {
                 $.ajax({
                     url: "https://server-rest-api.herokuapp.com/personnes/", // La ressource ciblée, pour Android utiliser http://10.0.2.2:5556/personnes/
                     type: "GET", // Le type de la requête HTTP,
                     cache: false, // n'enregistre pas temporairement des copies de données
-                    dataType : 'json', //  Le type de données à recevoir, ici, du json
+                    dataType: 'json', //  Le type de données à recevoir, ici, du json
                     success: function (data) {
                         console.log(data);
                         // $('#personList li').remove();
@@ -210,14 +212,14 @@
                     }
                 });
             },
-            showPersonDetails: function(id) {
+            showPersonDetails: function (id) {
                 if (id == null) return;
                 $('#personSearchPanel').hide();
                 $.ajax({
-                    url: "https://server-rest-api.herokuapp.com/personnes/"+id, // La ressource ciblée, pour Android utiliser http://10.0.2.2:5556/personnes/
+                    url: "https://server-rest-api.herokuapp.com/personnes/" + id, // La ressource ciblée, pour Android utiliser http://10.0.2.2:5556/personnes/
                     type: "GET", // Le type de la requête HTTP,
                     cache: false, // n'enregistre pas temporairement des copies de données
-                    dataType : 'json', //  Le type de données à recevoir, ici, du json
+                    dataType: 'json', //  Le type de données à recevoir, ici, du json
                     success: function (person) {
                         console.log(person);
                         $('#personDetailsPanel').show();
@@ -230,25 +232,25 @@
                 });
 
             },
-            backToSearch: function() {
+            backToSearch: function () {
                 $('#personDetailsPanel').hide();
                 $('#personSearchPanel').show();
                 $('#personList').focus();
             },
-            collectFieldsValues: function() {
+            collectFieldsValues: function () {
                 return {
                     id: $('#id').val(),
                     nom: $('#nom').val(),
                     prenom: $('#prenom').val()
                 };
             },
-            deletePerson: function() {
+            deletePerson: function () {
                 console.log($("#id").val());
-                if ($('#id').val() != ''){
+                if ($('#id').val() != '') {
                     if (!confirm('Delete ?')) return false;
                     var self = this;
                     $.ajax({
-                        url: "https://server-rest-api.herokuapp.com/personnes/"+$('#id').val(), // La ressource ciblée, pour Android utiliser http://10.0.2.2:5556/personnes/
+                        url: "https://server-rest-api.herokuapp.com/personnes/" + $('#id').val(), // La ressource ciblée, pour Android utiliser http://10.0.2.2:5556/personnes/
                         type: "DELETE", // Le type de la requête HTTP,
                         cache: false, // n'enregistre pas temporairement des copies de données
                         success: function (person) {
@@ -257,11 +259,11 @@
                     });
                 }
             },
-            refreshSearch: function() {
+            refreshSearch: function () {
                 this.backToSearch();
                 this.showPersonList();
             },
-            newPerson: function() {
+            newPerson: function () {
                 $('#personSearchPanel').hide();
                 $('#personDetailsPanel').show();
                 $("#nom").val("Nom");
@@ -270,60 +272,78 @@
                 $('#id').attr('value', null);
                 $('#nom').attr('value', 'Nom').focus().select();
                 $('#prenom').attr('value', 'Prénom');
-                
+
             },
-            savePerson: function() {
-                if ($('#nom').val() != 'Nom' && $('#prenom').val() != 'Prénom'){
+            savePerson: function () {
+                if ($('#nom').val() != 'Nom' && $('#prenom').val() != 'Prénom') {
                     if (!confirm('Save ?')) return false;
 
                     var requestType = $('#id').val() != '' ? 'PUT' : 'POST';
                     $.ajax({
-                        url: "https://server-rest-api.herokuapp.com/personnes/"+$('#id').val(), // La ressource ciblée, pour Android utiliser http://10.0.2.2:5556/personnes/
-                        type: requestType, 
+                        url: "https://server-rest-api.herokuapp.com/personnes/" + $('#id').val(), // La ressource ciblée, pour Android utiliser http://10.0.2.2:5556/personnes/
+                        type: requestType,
                         data: personManager.collectFieldsValues(), // on transmet les données pour le put ou post
-                        cache: false, 
-                        dataType : 'json', //  Le type de données à recevoir, ici, du json
+                        cache: false,
+                        dataType: 'json', //  Le type de données à recevoir, ici, du json
                         success: function (result) {
-                        if (result.error) {
+                            if (result.error) {
                                 alert(result.error[0].message);
-                        } else {
-                            if (requestType == 'POST') alert('ID de la nouvelle entree: ' + result.id);
-                            personManager.refreshSearch();
-                        }
+                            } else {
+                                if (requestType == 'POST') alert('ID de la nouvelle entree: ' + result.id);
+                                personManager.refreshSearch();
+                            }
                         }
                     });
                 }
             }
         }
 
-        $(document).ready(function() {
-            
+        function cameraTakePicture() {
+            navigator.camera.getPicture(onSuccess, onFail, {
+                quality: 50,
+                destinationType: Camera.DestinationType.DATA_URL
+            });
+
+            function onSuccess(imageData) {
+                var image = document.getElementById('myImage');
+                image.src = "data:image/jpeg;base64," + imageData;
+            }
+
+            function onFail(message) {
+                alert('Failed because: ' + message);
+            }
+        }
+
+        $(document).ready(function () {
+
+            document.getElementById("cameraTakePicture").addEventListener("click", cameraTakePicture);
+
             $('.sidenav').sidenav();
 
 
             $('#personListPanel, #personDetailsPanel').hide();
 
-            $('#findButton').click(function(e) {
+            $('#findButton').click(function (e) {
                 e.preventDefault();
                 personManager.showPersonList();
             });
 
-            $('#backToSearchButton').click(function(e) {
+            $('#backToSearchButton').click(function (e) {
                 e.preventDefault();
                 personManager.backToSearch();
             });
 
-            $('#newButton').click(function(e) {
+            $('#newButton').click(function (e) {
                 e.preventDefault();
                 personManager.newPerson();
             });
 
-            $('#saveButton').click(function(e) {
+            $('#saveButton').click(function (e) {
                 e.preventDefault();
                 personManager.savePerson();
             });
 
-            $('#deleteButton').click(function(e) {
+            $('#deleteButton').click(function (e) {
                 e.preventDefault();
                 personManager.deletePerson();
             });
